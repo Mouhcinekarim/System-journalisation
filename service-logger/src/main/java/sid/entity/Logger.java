@@ -3,11 +3,13 @@ package sid.entity;
 
 import java.time.Instant;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,8 +28,19 @@ public class Logger {
 	private String serviceName;
 	private String methode;
 	private Instant dateRequest;
-	private String endpois;
+	private String requestId;
+	private String endpoids;
+	private int statusCode;
+	//[key,value]
+	private String params;
+	private String bidies;
+    @Column(columnDefinition = "boolean default true")
+	private Boolean anonymous;
+	private String userName;
+	private String role;
 	@ManyToOne()
 	private ApiKey apiKey;
 	
 }
+
+

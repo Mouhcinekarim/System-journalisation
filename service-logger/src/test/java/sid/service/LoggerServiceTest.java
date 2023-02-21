@@ -7,11 +7,9 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 //je veux dit a spring que je veux tester chez vous
 import org.springframework.test.context.junit4.SpringRunner;
@@ -23,10 +21,15 @@ import sid.Dto.ResponseLoggerDto;
 @SpringBootTest(classes = ServiceLoggerApplication.class)
 public class LoggerServiceTest {
 
-	@Autowired
 	private LoggerService loggerServicel;
-	@Autowired
 	private ServiceApiKey serviceApiKey;
+	
+	public LoggerServiceTest(LoggerService loggerServicel, ServiceApiKey serviceApiKey) {
+		super();
+		this.loggerServicel = loggerServicel;
+		this.serviceApiKey = serviceApiKey;
+	}
+
 	private String key;
 	private RequestLoggerDto requestLoggerDto1,requestLoggerDto2,requestLoggerDto3;
 	
@@ -39,42 +42,38 @@ public class LoggerServiceTest {
 		System.out.println(key);
 	    requestLoggerDto1=RequestLoggerDto.builder()
 				.keyValue(key)
-				.endpois("saveProduct")
+				.endpoids("saveProduct")
 				.methode("post")
 				.serviceName("product-service")	
 				.build();
 		requestLoggerDto2=RequestLoggerDto.builder()
 				.keyValue(key)
-				.endpois("products")
+				.endpoids("products")
 				.methode("get")
 				.serviceName("product-service")	
 				.build();
 	 requestLoggerDto3=RequestLoggerDto.builder()
 				.keyValue(key)
-				.endpois("updateproducts")
+				.endpoids("updateproducts")
 				.methode("put")
 				.serviceName("product-service")	
 				.build();
-	    loggerServicel.saveLogger(requestLoggerDto1);
-		loggerServicel.saveLogger(requestLoggerDto2);
-		loggerServicel.saveLogger(requestLoggerDto3);
+	    loggerServicel.info(requestLoggerDto1);
+		loggerServicel.info(requestLoggerDto2);
+		loggerServicel.info(requestLoggerDto3);
 		}
 
 	}
 	
-	
-
-	
-
 	@Test
 	void testSaveLogger() {
 		RequestLoggerDto requestLoggerDto=RequestLoggerDto.builder()
 				.keyValue(key)
-				.endpois("products")
+				.endpoids("products")
 				.methode("get")
 				.serviceName("product-service")	
 				.build();
-		ResponseLoggerDto dto= loggerServicel.saveLogger(requestLoggerDto);
+		ResponseLoggerDto dto= loggerServicel.info(requestLoggerDto);
 		assertNotNull(dto);
 		assertEquals(dto.getMethode(), "get");
 		assertEquals(dto.getServiceName(), "product-service");
@@ -84,9 +83,6 @@ public class LoggerServiceTest {
 
 	@Test
 	void testGetLoggersByDate() {
-	
-		
-		
 		
 		List<ResponseLoggerDto> dtos=loggerServicel.getLoggersbetweenDates(new Date(System.currentTimeMillis()-1000*60*60), new Date());
 		assertTrue(dtos.size()>=3);

@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Assertions;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -23,9 +22,11 @@ import sid.Dto.ResponseApiKeyDto;
 @SpringBootTest(classes = ServiceLoggerApplication.class)
 public class ServiceApiKeyTest {
 
-
 	@Autowired
 	private ServiceApiKey serviceApiKey;
+
+	
+
 	String useeId="user";
 
 	String key;

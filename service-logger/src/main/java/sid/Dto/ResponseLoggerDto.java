@@ -16,4 +16,8 @@ public class ResponseLoggerDto {
 	private Instant dateRequest;
 	private String endpois;
 	private String keyValue;
+	private String userName;
+	private String role;
+	private String params;
+	private String bidies;
 }
