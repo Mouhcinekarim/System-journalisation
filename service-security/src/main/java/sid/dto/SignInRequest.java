@@ -1,5 +1,7 @@
 package sid.dto;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,11 +10,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-class SignUpRequest {
+public class SignInRequest {
 
 	private String username;
 	private String email;
 	private String password;
-	private String roleName;
+	private List<String> roleNames;
 	
 }

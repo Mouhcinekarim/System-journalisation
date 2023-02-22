@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
@@ -38,5 +39,12 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "role_user")
 	private List<Role> roles;
+    @OneToOne(mappedBy = "user")
+    private Token token;
+    
+    
+    public void addRole(Role role) {
+    	roles.add(role);
+    }
 	
 }

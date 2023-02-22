@@ -1,9 +1,14 @@
 package sid.Entity;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,6 +25,13 @@ public class Permission {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idPermission;
 	private String name;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "role_permission")
+	private Set<Role> roles;
+    
+    public void addRole(Role role) {
+    	roles.add(role);
+    }
 	
 	
 }
